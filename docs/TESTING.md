@@ -24,6 +24,7 @@ shared during every measurement below.
 | Audio | `game/tests/render_audio.gd`: 2 minutes rendered offline from a live simulation | Peak −23.4 dBFS, RMS −36.8 dBFS, nothing rate-limited |
 | Frame times | `--bench 20` | 60.0 fps locked in a window. At 3840 × 2160 offscreen, uncapped: mean 10.0 ms (99.8 fps), p99 10.4 ms |
 | Live streaming | Local RTMP server: picture, sound, sync, frame rate | Pass (see below) |
+| Server address check | `game/tests/live_server_check.gd`: a share link, a source name and a blank box are refused before ffmpeg starts, with a message naming the problem | Pass |
 | Real-time 24-hour soak | `--soak 24` | **Not run.** It needs 24 real hours. |
 
 Run the core suite with `build/wormfarm_tests`. It takes about 10 minutes, most of it the two 24-hour pacing
@@ -97,7 +98,10 @@ service:
   redaction); see that project's test report. Keys are stored under their own keyring attribute
   (`application shadow-worm-farm`).
 
-Not tested against YouTube or X themselves, which needs your key.
+**On X, 2026-09-24:** the worm farm went live to an X livestream (Auto-start on) at 1080p · 7 Mb/s, alongside Shadow
+Ant Farm's YouTube stream on the same machine. Both stayed live; GPU at 50%, video encoder at 11%. Getting there
+took two wrong pastes into the Server box (the source's name, then the broadcast's share link); 1.0.1 now refuses
+both with a clear message.
 
 ## Real-time 24-hour soak
 

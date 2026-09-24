@@ -66,8 +66,10 @@ black because a screen share stopped.
 **Set up once, in the operator window (F2) → Live stream:**
 
 1. Choose **Stream to**: YouTube, X or Custom RTMP.
-2. For **X** or **Custom**, paste the **server address**. For X, use the RTMPS address shown for *your* source in
-   Media Studio → Producer → Sources, because sources live on different servers. YouTube needs no address.
+2. For **X** or **Custom**, paste the **server address**. YouTube needs no address. For X, create the livestream,
+   then open *Edit livestream → Details → Show RTMP* and copy the **RTMP URL** of its source. It starts with
+   `rtmp://` or `rtmps://`; the broadcast's `https://x.com/…` share link and the source's name are not server
+   addresses, and the app refuses them with a message saying so.
 3. Paste the **stream key** and press **Save key**. It goes into your desktop keyring (`secret-tool`), never into
    files or logs. Keys are kept separately from Shadow Ant Farm's.
 4. Choose the **Quality**: 720p at 4 Mb/s (recommended) or 1080p at 7 Mb/s.
@@ -81,7 +83,8 @@ black because a screen share stopped.
   If the server keeps refusing it (a wrong key or address), it stops after five tries and says so.
 - **YouTube:** in YouTube Studio → Stream settings, turn on **Auto-start** once. YouTube then goes public by
   itself whenever the bin starts sending.
-- **X:** once the source shows *connected* in Producer, start the broadcast there. X has no auto-start.
+- **X:** with *Auto-start* on for the livestream, X goes live by itself once its source turns green; otherwise
+  press *Go Live* on the livestream page once the source shows connected.
 - **Running alongside Shadow Ant Farm:** both apps can stream at the same time, each to its own destination, with
   its own key. Use a different YouTube stream (key) for each, because one key accepts only one sender.
 

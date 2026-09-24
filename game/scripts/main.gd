@@ -294,7 +294,8 @@ func _rss_mb() -> float:
 	var f := FileAccess.open("/proc/self/statm", FileAccess.READ)
 	if f == null:
 		return 0.0
-	var parts := f.get_as_text().split(" ")
+	# /proc files report a size of 0, so read a line rather than "the whole file".
+	var parts := f.get_line().split(" ")
 	return float(parts[1]) * 4096.0 / 1048576.0 if parts.size() > 1 else 0.0
 
 

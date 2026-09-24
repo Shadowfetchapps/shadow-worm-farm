@@ -10,7 +10,7 @@ const DESTINATIONS := {
 	"youtube": {"name": "YouTube", "server": "rtmps://a.rtmps.youtube.com:443/live2", "keyframe": 2, "ask_server": false,
 		"help": "YouTube Studio → Create → Go live → Stream → Stream settings → Stream key. Turn on Auto-start there and YouTube goes public by itself whenever the bin starts sending."},
 	"x": {"name": "X", "server": "", "keyframe": 3, "ask_server": true,
-		"help": "Media Studio → Producer → Sources: copy the RTMPS address and the stream key of your source (the address matters: sources live on different servers). Start the broadcast in Producer once the source shows connected."},
+		"help": "On X: create the livestream, then Edit livestream → Details → Show RTMP. Copy the RTMP URL (it starts with rtmp://, not the https:// share link) into Server and the stream key into Stream key. With Auto-start on, X goes live once its source turns green; otherwise press Go Live there."},
 	"custom": {"name": "Custom RTMP", "server": "", "keyframe": 2, "ask_server": true,
 		"help": "Any RTMP or RTMPS server: its address here, its stream key below."},
 }
@@ -27,6 +27,7 @@ var _camera: Camera3D
 var _size := Vector2i(1280, 720)
 var _grab_accum := 0.0
 var _last_state := "idle"
+var _setup_error := "" ## a problem found before ffmpeg was started (shown in place of the stream's own status)
 
 
 func setup(p_view: FarmView, p_settings: Dictionary) -> void:
@@ -59,6 +60,18 @@ func start(url_override := "") -> bool:
 	if stream.is_active():
 		return true
 	var dest := destination()
+	_setup_error = ""
+	if url_override.is_empty():
+		var server := server_for(dest).strip_edges()
+		if not (server.begins_with("rtmp://") or server.begins_with("rtmps://")):
+			# A pasted share link, source name or blank box would otherwise reach ffmpeg as a file name.
+			_setup_error = "The server address must start with rtmp:// or rtmps://. %s" % (
+				"On X it is the RTMP URL of your source (Edit livestream → Show RTMP), not the broadcast's share link."
+				if dest == "x" else "Paste the RTMP server address from your streaming service.")
+			if not server.is_empty():
+				_setup_error += " It is now: %s" % server.left(60)
+			AppLog.warn("live: not started, server address is not an RTMP URL")
+			return false
 	var q: Dictionary = QUALITIES[clampi(int(config().get("quality", 0)), 0, QUALITIES.size() - 1)]
 	_size = Vector2i(int(q["w"]), int(q["h"]))
 	_ensure_viewport()
@@ -82,6 +95,8 @@ func stop() -> void:
 
 
 func status() -> Dictionary:
+	if not _setup_error.is_empty() and not stream.is_active():
+		return {"state": "failed", "message": _setup_error}
 	return stream.get_status()
 
 
