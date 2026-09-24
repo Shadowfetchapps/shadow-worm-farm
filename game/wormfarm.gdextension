@@ -1,0 +1,9 @@
+[configuration]
+
+entry_symbol = "wormfarm_library_init"
+compatibility_minimum = "4.7"
+reloadable = false
+
+[libraries]
+
+linux.x86_64 = "res://bin/libwormfarm.so"

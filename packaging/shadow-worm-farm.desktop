@@ -1,0 +1,31 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Shadow Worm Farm
+GenericName=Worm Farm
+Comment=A photorealistic glass-sided worm bin to watch and stream
+Exec=@BIN@
+TryExec=@BIN@
+Icon=shadow-worm-farm
+Terminal=false
+Categories=Game;Simulation;
+Keywords=worm;worms;earthworm;vermicompost;compost;farm;stream;ambient;
+StartupNotify=true
+StartupWMClass=Shadow Worm Farm
+Actions=resume;live;operator;windowed;
+
+[Desktop Action resume]
+Name=Resume last bin
+Exec=@BIN@ --resume
+
+[Desktop Action live]
+Name=Resume and go live
+Exec=@BIN@ --resume --live --operator
+
+[Desktop Action operator]
+Name=Resume with operator window
+Exec=@BIN@ --resume --operator
+
+[Desktop Action windowed]
+Name=New bin in a window
+Exec=@BIN@ --windowed --operator

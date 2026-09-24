@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="bed" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7a5a3a"/>
+      <stop offset="0.45" stop-color="#4a3322"/>
+      <stop offset="1" stop-color="#2a1d14"/>
+    </linearGradient>
+    <linearGradient id="worm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#c0525a"/>
+      <stop offset="1" stop-color="#7e2230"/>
+    </linearGradient>
+    <linearGradient id="wood" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8a5c34"/>
+      <stop offset="1" stop-color="#5a3a1f"/>
+    </linearGradient>
+  </defs>
+  <rect x="12" y="12" width="232" height="232" rx="36" fill="url(#wood)"/>
+  <rect x="32" y="32" width="192" height="192" rx="16" fill="#1a1512"/>
+  <path d="M32 84 C62 78 96 90 130 82 C164 75 196 86 224 80 V208 a16 16 0 0 1 -16 16 H48 a16 16 0 0 1 -16 -16 Z" fill="url(#bed)"/>
+  <g fill="#1b120c" opacity="0.55">
+    <circle cx="60" cy="190" r="5"/><circle cx="178" cy="200" r="4"/><circle cx="200" cy="150" r="3.5"/><circle cx="84" cy="126" r="3"/>
+    <circle cx="148" cy="118" r="4"/><circle cx="112" cy="206" r="3"/>
+  </g>
+  <path d="M58 112 C84 96 118 104 126 128 C134 152 106 162 102 180 C98 200 136 210 166 192 C188 178 190 150 206 140"
+        fill="none" stroke="#3a1a14" stroke-width="22" stroke-linecap="round" opacity="0.5"/>
+  <path d="M58 112 C84 96 118 104 126 128 C134 152 106 162 102 180 C98 200 136 210 166 192 C188 178 190 150 206 140"
+        fill="none" stroke="url(#worm)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M110 108 C118 114 124 120 126 128" fill="none" stroke="#d98a6a" stroke-width="17" stroke-linecap="butt" opacity="0.85"/>
+  <path d="M58 112 C84 96 118 104 126 128 C134 152 106 162 102 180 C98 200 136 210 166 192 C188 178 190 150 206 140"
+        fill="none" stroke="#f4c2c0" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" opacity="0.55" transform="translate(-2 -3)"/>
+  <ellipse cx="176" cy="66" rx="30" ry="9" fill="#9fbf52" transform="rotate(-8 176 66)"/>
+  <path d="M34 36 L96 36 L40 110 Z" fill="#ffffff" opacity="0.07"/>
+</svg>
